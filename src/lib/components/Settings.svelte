@@ -39,20 +39,36 @@
 <div class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
   <div class="bg-zinc-900 border border-zinc-700 rounded-2xl w-full max-w-md shadow-2xl flex flex-col max-h-[90vh]">
     <div class="flex justify-between items-center p-6 border-b border-zinc-800">
-      <h2 class="text-lg font-bold text-zinc-300 tracking-widest uppercase">Presets Setup</h2>
+      <h2 class="text-lg font-bold text-zinc-300 tracking-widest uppercase">Settings</h2>
       <button aria-label="Close settings" onclick={onClose} class="text-zinc-500 hover:text-white transition-colors">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
       </button>
     </div>
 
-    <div class="p-6 overflow-y-auto flex-1">
+    <div class="p-6 overflow-y-auto flex-1 flex flex-col gap-8">
+
+      <!-- Color Theme Setup -->
+      <section>
+        <h3 class="text-xs font-bold text-zinc-500 tracking-widest uppercase mb-3">Accent Color</h3>
+        <div class="flex gap-4">
+          <button aria-label="Amber" onclick={() => manager.setAccentColor("amber")} class="w-8 h-8 rounded-full bg-amber-500 {manager.accentColor === 'amber' ? 'ring-2 ring-offset-2 ring-offset-zinc-900 ring-amber-500' : 'opacity-50 hover:opacity-100'} transition-all"></button>
+          <button aria-label="Green" onclick={() => manager.setAccentColor("green")} class="w-8 h-8 rounded-full bg-emerald-500 {manager.accentColor === 'green' ? 'ring-2 ring-offset-2 ring-offset-zinc-900 ring-emerald-500' : 'opacity-50 hover:opacity-100'} transition-all"></button>
+          <button aria-label="Blue" onclick={() => manager.setAccentColor("blue")} class="w-8 h-8 rounded-full bg-blue-500 {manager.accentColor === 'blue' ? 'ring-2 ring-offset-2 ring-offset-zinc-900 ring-blue-500' : 'opacity-50 hover:opacity-100'} transition-all"></button>
+          <button aria-label="Rose" onclick={() => manager.setAccentColor("rose")} class="w-8 h-8 rounded-full bg-rose-500 {manager.accentColor === 'rose' ? 'ring-2 ring-offset-2 ring-offset-zinc-900 ring-rose-500' : 'opacity-50 hover:opacity-100'} transition-all"></button>
+          <button aria-label="Purple" onclick={() => manager.setAccentColor("purple")} class="w-8 h-8 rounded-full bg-purple-500 {manager.accentColor === 'purple' ? 'ring-2 ring-offset-2 ring-offset-zinc-900 ring-purple-500' : 'opacity-50 hover:opacity-100'} transition-all"></button>
+        </div>
+      </section>
+
+      <!-- Presets Setup -->
+      <section>
+        <h3 class="text-xs font-bold text-zinc-500 tracking-widest uppercase mb-3">Presets Setup</h3>
       {#if editingId}
         <div class="space-y-4 bg-zinc-950 p-4 rounded-xl border border-zinc-800">
           <div>
             <label class="block text-xs font-bold text-zinc-500 mb-1" for="editName"><span class="sr-only">NAME</span>NAME</label>
             <input id="editName"
               bind:value={editName}
-              class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-300 focus:outline-none focus:border-amber-500 transition-colors"
+              class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-300 focus:outline-none focus:border-[var(--color-accent-custom)] transition-colors"
               placeholder="e.g. POMODORO"
             />
           </div>
@@ -62,11 +78,11 @@
               type="number"
               bind:value={editMinutes}
               min="1" max="999"
-              class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-300 focus:outline-none focus:border-amber-500 transition-colors"
+              class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-300 focus:outline-none focus:border-[var(--color-accent-custom)] transition-colors"
             />
           </div>
           <div class="flex gap-2 pt-2">
-            <button onclick={saveEdit} class="flex-1 bg-amber-600 hover:bg-amber-500 text-black font-bold py-2 rounded-lg transition-colors">
+            <button onclick={saveEdit} class="flex-1 bg-[var(--color-accent-custom)] opacity-90 hover:opacity-100 text-black font-bold py-2 rounded-lg transition-colors">
               SAVE
             </button>
             <button onclick={cancelEdit} class="flex-1 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-bold py-2 rounded-lg transition-colors">
@@ -80,7 +96,7 @@
             <div class="flex items-center justify-between bg-zinc-800/50 border border-zinc-700/50 p-4 rounded-xl">
               <div>
                 <div class="font-bold text-zinc-300 tracking-wider">{preset.name}</div>
-                <div class="text-sm font-mono text-amber-500">{preset.minutes} MIN</div>
+                <div class="text-sm font-mono text-[var(--color-accent-custom)]">{preset.minutes} MIN</div>
               </div>
               <div class="flex gap-2">
                 <button aria-label="Edit preset" onclick={() => startEdit(preset)} class="p-2 text-zinc-400 hover:text-white transition-colors">
@@ -102,6 +118,7 @@
           </button>
         </div>
       {/if}
+      </section>
     </div>
   </div>
 </div>

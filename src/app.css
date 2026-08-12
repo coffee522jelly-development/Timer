@@ -106,4 +106,26 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Custom Accent Themes */
+  .theme-amber {
+    --color-accent-custom: #f59e0b; /* amber-500 */
+    --color-accent-custom-glow: rgba(245, 158, 11, 0.8);
+  }
+  .theme-green {
+    --color-accent-custom: #10b981; /* emerald-500 */
+    --color-accent-custom-glow: rgba(16, 185, 129, 0.8);
+  }
+  .theme-blue {
+    --color-accent-custom: #3b82f6; /* blue-500 */
+    --color-accent-custom-glow: rgba(59, 130, 246, 0.8);
+  }
+  .theme-rose {
+    --color-accent-custom: #f43f5e; /* rose-500 */
+    --color-accent-custom-glow: rgba(244, 63, 94, 0.8);
+  }
+  .theme-purple {
+    --color-accent-custom: #a855f7; /* purple-500 */
+    --color-accent-custom-glow: rgba(168, 85, 247, 0.8);
+  }
 }

@@ -12,8 +12,11 @@ const defaultPresets: Preset[] = [
   { id: "3", name: "LONG", minutes: 30 },
 ];
 
+export type AccentColor = "amber" | "green" | "blue" | "rose" | "purple";
+
 export class PresetManager {
   presets = $state<Preset[]>([]);
+  accentColor = $state<AccentColor>("green"); // Default changed to green per new logo
   private isLoaded = $state(false);
 
   constructor() {
@@ -28,9 +31,15 @@ export class PresetManager {
       if (saved && saved.length > 0) {
         this.presets = saved;
       }
+
+      const savedColor = await store.get<AccentColor>("accentColor");
+      if (savedColor) {
+        this.accentColor = savedColor;
+      }
+
       this.isLoaded = true;
     } catch (e) {
-      console.warn("Could not load presets from store, using defaults", e);
+      console.warn("Could not load settings from store, using defaults", e);
       this.isLoaded = true;
     }
   }
@@ -39,10 +48,16 @@ export class PresetManager {
     try {
       const store = await load("settings.json", { autoSave: false });
       await store.set("presets", $state.snapshot(this.presets));
+      await store.set("accentColor", this.accentColor);
       await store.save();
     } catch (e) {
-      console.error("Failed to save presets", e);
+      console.error("Failed to save settings", e);
     }
+  }
+
+  async setAccentColor(color: AccentColor) {
+    this.accentColor = color;
+    await this.save();
   }
 
   async addPreset(name: string, minutes: number) {

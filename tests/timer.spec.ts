@@ -45,11 +45,15 @@ test('timer starts when play is clicked', async ({ page }) => {
   await page.goto('/');
 
   const playButton = page.getByRole('button', { name: 'Play or Pause' });
-  await expect(playButton).toContainText('PLAY');
+  // PLAY/PAUSE text is now a separate span preceding the button
+  const playTextSpan = page.locator('span', { hasText: 'PLAY' }).first();
+  await expect(playTextSpan).toBeVisible();
+
   await playButton.click();
 
   // The button text should change to PAUSE
-  await expect(playButton).toContainText('PAUSE');
+  const pauseTextSpan = page.locator('span', { hasText: 'PAUSE' }).first();
+  await expect(pauseTextSpan).toBeVisible();
 
   // Wait for 1s and check if time decremented (starts at 25:00 -> 24:59)
   await page.waitForTimeout(1100);

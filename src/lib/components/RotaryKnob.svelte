@@ -120,8 +120,8 @@
       class="absolute w-full h-full pointer-events-none transition-transform duration-75 ease-out"
       style="transform: rotate({currentAngle}deg);"
     >
-      <div class="absolute top-[9%] left-1/2 -translate-x-1/2 w-[4px] h-[18%] bg-amber-500 rounded-full shadow-[0_0_8px_rgba(245,158,11,0.7)] z-10"></div>
-      <div class="absolute top-[9%] left-1/2 -translate-x-1/2 w-[4px] h-[18%] bg-amber-400 rounded-full blur-[2px] opacity-70 z-0"></div>
+      <div class="absolute top-[9%] left-1/2 -translate-x-1/2 w-[4px] h-[18%] bg-[var(--color-accent-custom)] rounded-full shadow-[0_0_8px_var(--color-accent-custom-glow)] z-10"></div>
+      <div class="absolute top-[9%] left-1/2 -translate-x-1/2 w-[4px] h-[18%] bg-[var(--color-accent-custom)] rounded-full blur-[2px] opacity-70 z-0"></div>
     </div>
   </div>
 </div>

@@ -55,12 +55,18 @@
 
 </script>
 
-<main class="min-h-screen bg-zinc-950 flex flex-col items-center justify-center p-8 font-sans selection:bg-amber-500/30">
+<main class="min-h-screen bg-zinc-950 flex flex-col items-center justify-center p-8 font-sans selection:bg-amber-500/30 theme-{presetManager.accentColor}">
 
   <div class="relative w-full max-w-lg bg-zinc-900 rounded-3xl p-10 shadow-[0_30px_60px_rgba(0,0,0,0.6),inset_0_2px_5px_rgba(255,255,255,0.05)] border border-zinc-800">
 
     <!-- Metallic top plate -->
     <div class="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-zinc-800/50 to-transparent rounded-t-3xl pointer-events-none"></div>
+
+    <!-- Corner Screws -->
+    <div class="absolute top-5 left-5 w-4 h-4 rounded-full bg-gradient-to-br from-zinc-500 to-zinc-800 shadow-[inset_0_1px_3px_rgba(0,0,0,0.8),0_1px_1px_rgba(255,255,255,0.1)] border border-zinc-900 flex items-center justify-center pointer-events-none"><div class="w-2 h-0.5 bg-zinc-900/50 rotate-45"></div></div>
+    <div class="absolute top-5 right-5 w-4 h-4 rounded-full bg-gradient-to-br from-zinc-500 to-zinc-800 shadow-[inset_0_1px_3px_rgba(0,0,0,0.8),0_1px_1px_rgba(255,255,255,0.1)] border border-zinc-900 flex items-center justify-center pointer-events-none"><div class="w-2 h-0.5 bg-zinc-900/50 -rotate-12"></div></div>
+    <div class="absolute bottom-5 left-5 w-4 h-4 rounded-full bg-gradient-to-br from-zinc-500 to-zinc-800 shadow-[inset_0_1px_3px_rgba(0,0,0,0.8),0_1px_1px_rgba(255,255,255,0.1)] border border-zinc-900 flex items-center justify-center pointer-events-none"><div class="w-2 h-0.5 bg-zinc-900/50 rotate-12"></div></div>
+    <div class="absolute bottom-5 right-5 w-4 h-4 rounded-full bg-gradient-to-br from-zinc-500 to-zinc-800 shadow-[inset_0_1px_3px_rgba(0,0,0,0.8),0_1px_1px_rgba(255,255,255,0.1)] border border-zinc-900 flex items-center justify-center pointer-events-none"><div class="w-2 h-0.5 bg-zinc-900/50 -rotate-45"></div></div>
 
     <!-- Panel Header -->
     <div class="flex justify-between items-start mb-8 relative z-10">
@@ -90,7 +96,7 @@
         <div class="relative z-10 flex flex-col items-center justify-center gap-3">
           <!-- Text Info Row (Preset or Manual info) -->
           <div class="w-full flex justify-between items-center px-2">
-            <span class="font-mono text-sm tracking-[0.2em] font-bold text-amber-500/80 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]">
+            <span class="font-mono text-sm tracking-[0.2em] font-bold text-[var(--color-accent-custom)]/80 drop-shadow-[0_0_8px_var(--color-accent-custom-glow)]">
               {#if isPresetMode && presetManager.presets.length > 0}
                 {presetManager.presets[presetIndex]?.name || "N/A"}
               {:else}
@@ -98,18 +104,18 @@
               {/if}
             </span>
             <div class="flex gap-2">
-              <span class="font-mono text-[10px] tracking-widest {timer.isRunning ? 'text-amber-500 drop-shadow-[0_0_8px_rgba(245,158,11,0.8)]' : 'text-zinc-700'} transition-colors duration-300">► PLAY</span>
+              <span class="font-mono text-[10px] tracking-widest {timer.isRunning ? 'text-[var(--color-accent-custom)] drop-shadow-[0_0_8px_var(--color-accent-custom-glow)]' : 'text-zinc-700'} transition-colors duration-300">► PLAY</span>
             </div>
           </div>
 
           <!-- Timer Row -->
-          <div class="font-mono text-7xl tracking-wider text-amber-500 drop-shadow-[0_0_15px_rgba(245,158,11,0.8)] font-bold tabular-nums">
+          <div class="font-mono text-7xl tracking-wider text-[var(--color-accent-custom)] drop-shadow-[0_0_15px_var(--color-accent-custom-glow)] font-bold tabular-nums">
             {timer.formattedTime}
           </div>
 
           <!-- Bottom Info Row -->
           <div class="w-full flex justify-end px-2">
-             <span class="font-mono text-xs tracking-widest text-amber-500/60">
+             <span class="font-mono text-xs tracking-widest text-[var(--color-accent-custom)]/60">
               {#if isPresetMode && presetManager.presets.length > 0}
                 {presetManager.presets[presetIndex]?.minutes || 0} MIN PRESET
               {:else}
@@ -142,41 +148,42 @@
       {/if}
 
       <!-- Bottom Button Row -->
-      <div class="flex items-center justify-center gap-6 w-full">
+      <div class="flex items-end justify-center gap-6 w-full pb-4">
 
         <!-- Mode Toggle -->
-        <button
-          aria-label="Toggle Preset Mode"
-          onclick={() => isPresetMode = !isPresetMode}
-          class="relative w-20 h-20 rounded-xl bg-gradient-to-b from-zinc-700 to-zinc-900 border border-zinc-600 shadow-[0_5px_10px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.2)] active:shadow-[0_2px_5px_rgba(0,0,0,0.5),inset_0_2px_4px_rgba(0,0,0,0.4)] active:from-zinc-800 active:to-zinc-950 flex flex-col items-center justify-center group transition-all duration-100"
-        >
-          <div class="absolute top-2 flex gap-1">
-            <div class="w-1.5 h-1.5 rounded-full {isPresetMode ? 'bg-amber-500 shadow-[0_0_5px_rgba(245,158,11,0.8)]' : 'bg-zinc-800'} transition-colors duration-300"></div>
-            <div class="w-1.5 h-1.5 rounded-full {!isPresetMode ? 'bg-amber-500 shadow-[0_0_5px_rgba(245,158,11,0.8)]' : 'bg-zinc-800'} transition-colors duration-300"></div>
-          </div>
-          <span class="mt-2 text-[10px] font-bold tracking-wider text-zinc-400 group-active:text-zinc-500 uppercase">MODE</span>
-        </button>
+        <div class="flex flex-col items-center gap-3">
+          <span class="text-[11px] font-bold tracking-wider text-zinc-400 uppercase">MODE</span>
+          <button
+            aria-label="Toggle Preset Mode"
+            onclick={() => isPresetMode = !isPresetMode}
+            class="relative w-20 h-20 rounded-xl bg-gradient-to-b from-zinc-700 to-zinc-900 border-x border-t border-zinc-600 border-b-[6px] border-b-zinc-950 shadow-[0_8px_15px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.2)] active:border-b-0 active:translate-y-[6px] active:bg-[var(--color-accent-custom)] active:shadow-[0_2px_5px_rgba(0,0,0,0.8),0_0_15px_var(--color-accent-custom-glow),inset_0_2px_4px_rgba(0,0,0,0.6)] transition-all duration-75"
+          >
+          </button>
+        </div>
 
-        <!-- Play/Pause Button (Larger) -->
-        <button
-          aria-label="Play or Pause"
-          onclick={() => timer.toggle()}
-          class="relative w-20 h-20 rounded-xl bg-gradient-to-b from-zinc-700 to-zinc-900 border border-zinc-500 shadow-[0_8px_15px_rgba(0,0,0,0.6),inset_0_1px_2px_rgba(255,255,255,0.3)] active:shadow-[0_2px_5px_rgba(0,0,0,0.5),inset_0_2px_4px_rgba(0,0,0,0.4)] active:from-zinc-800 active:to-zinc-950 flex items-center justify-center group transition-all duration-100"
-        >
-          <div class="absolute top-3 w-3 h-3 rounded-full {timer.isRunning ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)]' : 'bg-zinc-800'} transition-colors duration-300"></div>
-          <span class="mt-2 text-sm font-bold tracking-wider text-zinc-300 group-active:text-zinc-500">
+        <!-- Play/Pause Button -->
+        <div class="flex flex-col items-center gap-3">
+          <span class="text-sm font-bold tracking-wider text-zinc-300 uppercase">
             {timer.isRunning ? 'PAUSE' : 'PLAY'}
           </span>
-        </button>
+          <button
+            aria-label="Play or Pause"
+            onclick={() => timer.toggle()}
+            class="relative w-20 h-20 rounded-xl bg-gradient-to-b from-zinc-700 to-zinc-900 border-x border-t border-zinc-500 border-b-[6px] border-b-zinc-950 shadow-[0_8px_15px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.3)] active:border-b-0 active:translate-y-[6px] active:bg-[var(--color-accent-custom)] active:shadow-[0_2px_5px_rgba(0,0,0,0.8),0_0_15px_var(--color-accent-custom-glow),inset_0_2px_4px_rgba(0,0,0,0.6)] transition-all duration-75"
+          >
+          </button>
+        </div>
 
         <!-- Reset Button -->
-        <button
-          aria-label="Reset Timer"
-          onclick={() => timer.reset()}
-          class="relative w-20 h-20 rounded-xl bg-gradient-to-b from-zinc-700 to-zinc-900 border border-zinc-600 shadow-[0_5px_10px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.2)] active:shadow-[0_2px_5px_rgba(0,0,0,0.5),inset_0_2px_4px_rgba(0,0,0,0.4)] active:from-zinc-800 active:to-zinc-950 flex items-center justify-center group transition-all duration-100"
-        >
-          <span class="text-[10px] font-bold tracking-wider text-zinc-400 group-active:text-zinc-500 uppercase">RESET</span>
-        </button>
+        <div class="flex flex-col items-center gap-3">
+          <span class="text-[11px] font-bold tracking-wider text-zinc-400 uppercase">RESET</span>
+          <button
+            aria-label="Reset Timer"
+            onclick={() => timer.reset()}
+            class="relative w-20 h-20 rounded-xl bg-gradient-to-b from-zinc-700 to-zinc-900 border-x border-t border-zinc-600 border-b-[6px] border-b-zinc-950 shadow-[0_8px_15px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.2)] active:border-b-0 active:translate-y-[6px] active:bg-[var(--color-accent-custom)] active:shadow-[0_2px_5px_rgba(0,0,0,0.8),0_0_15px_var(--color-accent-custom-glow),inset_0_2px_4px_rgba(0,0,0,0.6)] transition-all duration-75"
+          >
+          </button>
+        </div>
 
       </div>
     </div>
