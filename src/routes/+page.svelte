@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Timer } from "$lib/timer.svelte.ts";
+  import { Timer } from "$lib/timer.svelte";
   import RotaryKnob from "$lib/components/RotaryKnob.svelte";
   import TimerPresets from "$lib/components/TimerPresets.svelte";
   import { isPermissionGranted, requestPermission, sendNotification } from '@tauri-apps/plugin-notification';
