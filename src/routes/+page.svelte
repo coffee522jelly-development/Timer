@@ -79,12 +79,44 @@
       </button>
     </div>
 
-    <!-- Digital Display -->
+    <!-- Digital Display (VFD Style) -->
     <div class="flex justify-center mb-10">
-      <div class="relative bg-zinc-950 px-10 py-5 rounded-2xl border-2 border-zinc-900 shadow-[inset_0_8px_20px_rgba(0,0,0,0.9)]">
-        <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 rounded-2xl pointer-events-none"></div>
-        <div class="font-mono text-7xl tracking-wider text-amber-500 drop-shadow-[0_0_12px_rgba(245,158,11,0.6)] font-bold tabular-nums">
-          {timer.formattedTime}
+      <div class="relative w-full max-w-sm bg-zinc-950 px-8 py-6 rounded-2xl border-[3px] border-zinc-900 shadow-[0_10px_20px_rgba(0,0,0,0.5),inset_0_8px_25px_rgba(0,0,0,0.9),inset_0_-2px_10px_rgba(255,255,255,0.05)] overflow-hidden">
+        <!-- VFD Scanline effect -->
+        <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(0,0,0,0)_50%,rgba(0,0,0,0.2)_50%)] bg-[length:100%_4px] z-20 mix-blend-overlay opacity-30"></div>
+        <!-- Inner glass reflection -->
+        <div class="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none z-20 rounded-xl"></div>
+
+        <div class="relative z-10 flex flex-col items-center justify-center gap-3">
+          <!-- Text Info Row (Preset or Manual info) -->
+          <div class="w-full flex justify-between items-center px-2">
+            <span class="font-mono text-sm tracking-[0.2em] font-bold text-amber-500/80 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]">
+              {#if isPresetMode && presetManager.presets.length > 0}
+                {presetManager.presets[presetIndex]?.name || "N/A"}
+              {:else}
+                MANUAL
+              {/if}
+            </span>
+            <div class="flex gap-2">
+              <span class="font-mono text-[10px] tracking-widest {timer.isRunning ? 'text-amber-500 drop-shadow-[0_0_8px_rgba(245,158,11,0.8)]' : 'text-zinc-700'} transition-colors duration-300">► PLAY</span>
+            </div>
+          </div>
+
+          <!-- Timer Row -->
+          <div class="font-mono text-7xl tracking-wider text-amber-500 drop-shadow-[0_0_15px_rgba(245,158,11,0.8)] font-bold tabular-nums">
+            {timer.formattedTime}
+          </div>
+
+          <!-- Bottom Info Row -->
+          <div class="w-full flex justify-end px-2">
+             <span class="font-mono text-xs tracking-widest text-amber-500/60">
+              {#if isPresetMode && presetManager.presets.length > 0}
+                {presetManager.presets[presetIndex]?.minutes || 0} MIN PRESET
+              {:else}
+                {normalMinutes} MINUTES
+              {/if}
+             </span>
+          </div>
         </div>
       </div>
     </div>
@@ -99,8 +131,6 @@
           min={0}
           max={presetManager.presets.length - 1}
           step={1}
-          displayValue={presetManager.presets[presetIndex]?.name || "N/A"}
-          displayLabel="{presetManager.presets[presetIndex]?.minutes || 0} MIN PRESET"
         />
       {:else}
         <RotaryKnob
@@ -108,8 +138,6 @@
           min={1}
           max={120}
           step={1}
-          displayValue={normalMinutes}
-          displayLabel="MINUTES"
         />
       {/if}
 

@@ -6,9 +6,7 @@
     min = 0,
     max = 60,
     step = 1,
-    size = 240, // Doubled from 120
-    displayValue = undefined,
-    displayLabel = "MIN"
+    size = 240 // Doubled from 120
   } = $props();
 
   let knobElement: HTMLDivElement;
@@ -124,15 +122,6 @@
     >
       <div class="absolute top-[9%] left-1/2 -translate-x-1/2 w-[4px] h-[18%] bg-amber-500 rounded-full shadow-[0_0_8px_rgba(245,158,11,0.7)] z-10"></div>
       <div class="absolute top-[9%] left-1/2 -translate-x-1/2 w-[4px] h-[18%] bg-amber-400 rounded-full blur-[2px] opacity-70 z-0"></div>
-    </div>
-  </div>
-
-  <div class="mt-6 flex flex-col items-center">
-    <div class="font-mono text-3xl font-medium tracking-widest text-zinc-300 drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">
-      {displayValue ?? value}
-    </div>
-    <div class="text-xs font-bold tracking-widest text-zinc-500 mt-1 uppercase">
-      {displayLabel}
     </div>
   </div>
 </div>
