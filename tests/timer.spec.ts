@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test('has expected retro timer title and looks correct', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('h1')).toContainText('Analog Audio Timer');
+  await expect(page.locator('h1')).toContainText('STEEP TIMER');
 
   // Visual regression test
   await expect(page).toHaveScreenshot('retro-timer-default.png');
@@ -10,6 +10,10 @@ test('has expected retro timer title and looks correct', async ({ page }) => {
 
 test('timer updates when preset mode knob is rotated', async ({ page }) => {
   await page.goto('/');
+
+  // First toggle into preset mode because it defaults to normal mode now
+  const modeButton = page.locator('button[aria-label="Toggle Preset Mode"]');
+  await modeButton.click();
 
   // Wait for presets to load (default is POMODORO 25m)
   const timerDisplay = page.locator('.font-mono.text-7xl');

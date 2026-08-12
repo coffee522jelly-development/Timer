@@ -23,7 +23,7 @@
   const presetManager = new PresetManager();
 
   // Modes
-  let isPresetMode = $state(true);
+  let isPresetMode = $state(false);
   let showSettings = $state(false);
 
   // State for normal mode
@@ -65,7 +65,7 @@
     <!-- Panel Header -->
     <div class="flex justify-between items-start mb-8 relative z-10">
       <div>
-        <h1 class="text-xs tracking-[0.3em] font-bold text-zinc-500 uppercase">Analog Audio Timer</h1>
+        <h1 class="text-xs tracking-[0.3em] font-bold text-zinc-500 uppercase">STEEP TIMER</h1>
         <div class="h-px w-16 bg-zinc-700 mt-2"></div>
       </div>
 
