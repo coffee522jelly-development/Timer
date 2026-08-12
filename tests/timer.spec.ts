@@ -17,7 +17,7 @@ test('timer updates when preset mode knob is rotated', async ({ page }) => {
 
   // Wait for presets to load (default is POMODORO 25m)
   const timerDisplay = page.locator('.font-mono.text-7xl');
-  await expect(timerDisplay).toHaveText('25:00', { timeout: 10000 });
+  await expect(timerDisplay).toHaveText('025:00', { timeout: 10000 });
 
   // Grab the knob bounding box
   const knob = page.locator('div[role="slider"]');
@@ -38,7 +38,7 @@ test('timer updates when preset mode knob is rotated', async ({ page }) => {
   await page.mouse.up();
 
   // The time should change since it selects the next preset (e.g. LONG 30m)
-  await expect(timerDisplay).not.toHaveText('25:00');
+  await expect(timerDisplay).not.toHaveText('025:00');
 });
 
 test('timer starts when play is clicked', async ({ page }) => {
@@ -55,5 +55,5 @@ test('timer starts when play is clicked', async ({ page }) => {
   await page.waitForTimeout(1100);
 
   const timerDisplay = page.locator('.font-mono.text-7xl');
-  await expect(timerDisplay).toHaveText('24:59');
+  await expect(timerDisplay).toHaveText('024:59');
 });

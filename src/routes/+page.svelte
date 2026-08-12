@@ -120,7 +120,7 @@
         <button
           aria-label="Toggle Preset Mode"
           onclick={() => isPresetMode = !isPresetMode}
-          class="relative w-16 h-16 rounded-full bg-gradient-to-b from-zinc-700 to-zinc-900 border border-zinc-600 shadow-[0_5px_10px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.2)] active:shadow-[0_2px_5px_rgba(0,0,0,0.5),inset_0_2px_4px_rgba(0,0,0,0.4)] active:from-zinc-800 active:to-zinc-950 flex flex-col items-center justify-center group transition-all duration-100"
+          class="relative w-20 h-20 rounded-xl bg-gradient-to-b from-zinc-700 to-zinc-900 border border-zinc-600 shadow-[0_5px_10px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.2)] active:shadow-[0_2px_5px_rgba(0,0,0,0.5),inset_0_2px_4px_rgba(0,0,0,0.4)] active:from-zinc-800 active:to-zinc-950 flex flex-col items-center justify-center group transition-all duration-100"
         >
           <div class="absolute top-2 flex gap-1">
             <div class="w-1.5 h-1.5 rounded-full {isPresetMode ? 'bg-amber-500 shadow-[0_0_5px_rgba(245,158,11,0.8)]' : 'bg-zinc-800'} transition-colors duration-300"></div>
@@ -133,7 +133,7 @@
         <button
           aria-label="Play or Pause"
           onclick={() => timer.toggle()}
-          class="relative w-20 h-20 rounded-full bg-gradient-to-b from-zinc-700 to-zinc-900 border border-zinc-500 shadow-[0_8px_15px_rgba(0,0,0,0.6),inset_0_1px_2px_rgba(255,255,255,0.3)] active:shadow-[0_2px_5px_rgba(0,0,0,0.5),inset_0_2px_4px_rgba(0,0,0,0.4)] active:from-zinc-800 active:to-zinc-950 flex items-center justify-center group transition-all duration-100"
+          class="relative w-20 h-20 rounded-xl bg-gradient-to-b from-zinc-700 to-zinc-900 border border-zinc-500 shadow-[0_8px_15px_rgba(0,0,0,0.6),inset_0_1px_2px_rgba(255,255,255,0.3)] active:shadow-[0_2px_5px_rgba(0,0,0,0.5),inset_0_2px_4px_rgba(0,0,0,0.4)] active:from-zinc-800 active:to-zinc-950 flex items-center justify-center group transition-all duration-100"
         >
           <div class="absolute top-3 w-3 h-3 rounded-full {timer.isRunning ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)]' : 'bg-zinc-800'} transition-colors duration-300"></div>
           <span class="mt-2 text-sm font-bold tracking-wider text-zinc-300 group-active:text-zinc-500">
@@ -145,7 +145,7 @@
         <button
           aria-label="Reset Timer"
           onclick={() => timer.reset()}
-          class="relative w-16 h-16 rounded-full bg-gradient-to-b from-zinc-700 to-zinc-900 border border-zinc-600 shadow-[0_5px_10px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.2)] active:shadow-[0_2px_5px_rgba(0,0,0,0.5),inset_0_2px_4px_rgba(0,0,0,0.4)] active:from-zinc-800 active:to-zinc-950 flex items-center justify-center group transition-all duration-100"
+          class="relative w-20 h-20 rounded-xl bg-gradient-to-b from-zinc-700 to-zinc-900 border border-zinc-600 shadow-[0_5px_10px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.2)] active:shadow-[0_2px_5px_rgba(0,0,0,0.5),inset_0_2px_4px_rgba(0,0,0,0.4)] active:from-zinc-800 active:to-zinc-950 flex items-center justify-center group transition-all duration-100"
         >
           <span class="text-[10px] font-bold tracking-wider text-zinc-400 group-active:text-zinc-500 uppercase">RESET</span>
         </button>

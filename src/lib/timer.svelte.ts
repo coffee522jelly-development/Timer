@@ -21,7 +21,7 @@ export class Timer {
   }
 
   get formattedTime() {
-    const m = this.minutes.toString().padStart(2, '0');
+    const m = this.minutes.toString().padStart(3, '0');
     const s = this.seconds.toString().padStart(2, '0');
     return `${m}:${s}`;
   }
