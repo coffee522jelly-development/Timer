@@ -59,6 +59,28 @@
         </div>
       </section>
 
+      <!-- Font Setup -->
+      <section>
+        <h3 class="text-xs font-bold text-zinc-500 tracking-widest uppercase mb-3">Timer Font</h3>
+        <select
+          value={manager.timerFont}
+          onchange={(e) => manager.setTimerFont(e.currentTarget.value as any)}
+          class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-3 text-zinc-300 focus:outline-none focus:border-[var(--color-accent-custom)] transition-colors"
+          style="font-family: {manager.timerFont}, monospace;"
+        >
+          <option value="ui-monospace">System Monospace</option>
+          <option value="VT323">VT323</option>
+          <option value="Orbitron">Orbitron</option>
+          <option value="Share Tech Mono">Share Tech Mono</option>
+          <option value="DotGothic16">DotGothic16</option>
+          <option value="Nova Mono">Nova Mono</option>
+          <option value="Audiowide">Audiowide</option>
+          <option value="Chakra Petch">Chakra Petch</option>
+          <option value="Bebas Neue">Bebas Neue</option>
+          <option value="Fira Code">Fira Code</option>
+        </select>
+      </section>
+
       <!-- Presets Setup -->
       <section>
         <h3 class="text-xs font-bold text-zinc-500 tracking-widest uppercase mb-3">Presets Setup</h3>

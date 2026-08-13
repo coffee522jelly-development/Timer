@@ -16,7 +16,7 @@ test('timer updates when preset mode knob is rotated', async ({ page }) => {
   await modeButton.click();
 
   // Wait for presets to load (default is POMODORO 25m)
-  const timerDisplay = page.locator('.font-mono.text-7xl');
+  const timerDisplay = page.locator('.text-7xl.tabular-nums');
   await expect(timerDisplay).toHaveText('025:00', { timeout: 10000 });
 
   // Grab the knob bounding box
@@ -58,6 +58,6 @@ test('timer starts when play is clicked', async ({ page }) => {
   // Wait for 1s and check if time decremented (starts at 25:00 -> 24:59)
   await page.waitForTimeout(1100);
 
-  const timerDisplay = page.locator('.font-mono.text-7xl');
+  const timerDisplay = page.locator('.text-7xl.tabular-nums');
   await expect(timerDisplay).toHaveText('024:59');
 });

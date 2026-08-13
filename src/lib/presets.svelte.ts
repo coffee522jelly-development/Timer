@@ -14,9 +14,12 @@ const defaultPresets: Preset[] = [
 
 export type AccentColor = "amber" | "green" | "blue" | "rose" | "purple";
 
+export type TimerFont = "ui-monospace" | "VT323" | "Orbitron" | "Share Tech Mono" | "DotGothic16" | "Nova Mono" | "Audiowide" | "Chakra Petch" | "Bebas Neue" | "Fira Code";
+
 export class PresetManager {
   presets = $state<Preset[]>([]);
   accentColor = $state<AccentColor>("green"); // Default changed to green per new logo
+  timerFont = $state<TimerFont>("ui-monospace");
   private isLoaded = $state(false);
 
   constructor() {
@@ -37,6 +40,11 @@ export class PresetManager {
         this.accentColor = savedColor;
       }
 
+      const savedFont = await store.get<TimerFont>("timerFont");
+      if (savedFont) {
+        this.timerFont = savedFont;
+      }
+
       this.isLoaded = true;
     } catch (e) {
       console.warn("Could not load settings from store, using defaults", e);
@@ -49,6 +57,7 @@ export class PresetManager {
       const store = await load("settings.json", { autoSave: false });
       await store.set("presets", $state.snapshot(this.presets));
       await store.set("accentColor", this.accentColor);
+      await store.set("timerFont", this.timerFont);
       await store.save();
     } catch (e) {
       console.error("Failed to save settings", e);
@@ -57,6 +66,11 @@ export class PresetManager {
 
   async setAccentColor(color: AccentColor) {
     this.accentColor = color;
+    await this.save();
+  }
+
+  async setTimerFont(font: TimerFont) {
+    this.timerFont = font;
     await this.save();
   }
 

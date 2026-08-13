@@ -96,7 +96,7 @@
         <div class="relative z-10 flex flex-col items-center justify-center gap-3">
           <!-- Text Info Row (Preset or Manual info) -->
           <div class="w-full flex justify-between items-center px-2">
-            <span class="font-mono text-sm tracking-[0.2em] font-bold text-[var(--color-accent-custom)]/80 drop-shadow-[0_0_8px_var(--color-accent-custom-glow)]">
+            <span class="font-mono text-sm tracking-[0.2em] font-bold text-[var(--color-accent-custom)]/80 drop-shadow-[0_0_4px_var(--color-accent-custom-glow)]">
               {#if isPresetMode && presetManager.presets.length > 0}
                 {presetManager.presets[presetIndex]?.name || "N/A"}
               {:else}
@@ -104,12 +104,12 @@
               {/if}
             </span>
             <div class="flex gap-2">
-              <span class="font-mono text-[10px] tracking-widest {timer.isRunning ? 'text-[var(--color-accent-custom)] drop-shadow-[0_0_8px_var(--color-accent-custom-glow)]' : 'text-zinc-700'} transition-colors duration-300">► PLAY</span>
+              <span class="font-mono text-[10px] tracking-widest {timer.isRunning ? 'text-[var(--color-accent-custom)] drop-shadow-[0_0_4px_var(--color-accent-custom-glow)]' : 'text-zinc-700'} transition-colors duration-300">► PLAY</span>
             </div>
           </div>
 
           <!-- Timer Row -->
-          <div class="font-mono text-7xl tracking-wider text-[var(--color-accent-custom)] drop-shadow-[0_0_15px_var(--color-accent-custom-glow)] font-bold tabular-nums">
+          <div class="text-7xl tracking-wider text-[var(--color-accent-custom)] drop-shadow-[0_0_8px_var(--color-accent-custom-glow)] tabular-nums" style="font-family: '{presetManager.timerFont}', monospace;">
             {timer.formattedTime}
           </div>
 
@@ -152,11 +152,12 @@
 
         <!-- Mode Toggle -->
         <div class="flex flex-col items-center gap-3">
-          <span class="text-[11px] font-bold tracking-wider text-zinc-400 uppercase">MODE</span>
+          <span class="text-[11px] font-bold tracking-wider text-zinc-400 uppercase {timer.isRunning ? 'opacity-50' : ''}">MODE</span>
           <button
             aria-label="Toggle Preset Mode"
             onclick={() => isPresetMode = !isPresetMode}
-            class="relative w-20 h-20 rounded-xl bg-gradient-to-b from-zinc-700 to-zinc-900 border-x border-t border-zinc-600 border-b-[6px] border-b-zinc-950 shadow-[0_8px_15px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.2)] active:border-b-0 active:translate-y-[6px] active:bg-[var(--color-accent-custom)] active:shadow-[0_2px_5px_rgba(0,0,0,0.8),0_0_15px_var(--color-accent-custom-glow),inset_0_2px_4px_rgba(0,0,0,0.6)] transition-all duration-75"
+            disabled={timer.isRunning}
+            class="relative w-24 h-14 rounded-md bg-gradient-to-b from-zinc-700 to-zinc-900 border-x border-t border-zinc-600 border-b-[8px] border-b-zinc-950 shadow-[0_8px_15px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.2)] active:border-b-0 active:translate-y-[8px] active:shadow-[0_2px_5px_rgba(0,0,0,0.8),inset_0_2px_4px_rgba(0,0,0,0.6)] disabled:opacity-50 disabled:pointer-events-none transition-all duration-75"
           >
           </button>
         </div>
@@ -169,7 +170,7 @@
           <button
             aria-label="Play or Pause"
             onclick={() => timer.toggle()}
-            class="relative w-20 h-20 rounded-xl bg-gradient-to-b from-zinc-700 to-zinc-900 border-x border-t border-zinc-500 border-b-[6px] border-b-zinc-950 shadow-[0_8px_15px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.3)] active:border-b-0 active:translate-y-[6px] active:bg-[var(--color-accent-custom)] active:shadow-[0_2px_5px_rgba(0,0,0,0.8),0_0_15px_var(--color-accent-custom-glow),inset_0_2px_4px_rgba(0,0,0,0.6)] transition-all duration-75"
+            class="relative w-24 h-14 rounded-md bg-gradient-to-b from-zinc-700 to-zinc-900 border-x border-t border-zinc-500 border-b-[8px] border-b-zinc-950 shadow-[0_8px_15px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.3)] active:border-b-0 active:translate-y-[8px] active:shadow-[0_2px_5px_rgba(0,0,0,0.8),inset_0_2px_4px_rgba(0,0,0,0.6)] transition-all duration-75"
           >
           </button>
         </div>
@@ -180,7 +181,7 @@
           <button
             aria-label="Reset Timer"
             onclick={() => timer.reset()}
-            class="relative w-20 h-20 rounded-xl bg-gradient-to-b from-zinc-700 to-zinc-900 border-x border-t border-zinc-600 border-b-[6px] border-b-zinc-950 shadow-[0_8px_15px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.2)] active:border-b-0 active:translate-y-[6px] active:bg-[var(--color-accent-custom)] active:shadow-[0_2px_5px_rgba(0,0,0,0.8),0_0_15px_var(--color-accent-custom-glow),inset_0_2px_4px_rgba(0,0,0,0.6)] transition-all duration-75"
+            class="relative w-24 h-14 rounded-md bg-gradient-to-b from-zinc-700 to-zinc-900 border-x border-t border-zinc-600 border-b-[8px] border-b-zinc-950 shadow-[0_8px_15px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.2)] active:border-b-0 active:translate-y-[8px] active:shadow-[0_2px_5px_rgba(0,0,0,0.8),inset_0_2px_4px_rgba(0,0,0,0.6)] transition-all duration-75"
           >
           </button>
         </div>
