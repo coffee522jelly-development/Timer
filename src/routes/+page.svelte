@@ -137,13 +137,16 @@
           min={0}
           max={presetManager.presets.length - 1}
           step={1}
+          disabled={timer.isRunning}
         />
       {:else}
         <RotaryKnob
           bind:value={normalMinutes}
-          min={1}
+          min={0}
           max={120}
           step={1}
+          disabled={timer.isRunning}
+          visualValue={timer.isRunning ? timer.timeRemaining / 60 : undefined}
         />
       {/if}
 

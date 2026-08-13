@@ -6,7 +6,9 @@
     min = 0,
     max = 60,
     step = 1,
-    size = 240 // Doubled from 120
+    size = 240, // Doubled from 120
+    disabled = false,
+    visualValue = undefined
   } = $props();
 
   let knobElement: HTMLDivElement;
@@ -21,7 +23,8 @@
     }
   });
 
-  let currentAngle = $derived(((value - min) / (max - min || 1)) * 270 - 135);
+  let effectiveValue = $derived(visualValue !== undefined ? visualValue : value);
+  let currentAngle = $derived(((effectiveValue - min) / (max - min || 1)) * 270 - 135);
 
   function getAngle(x: number, y: number, rect: DOMRect) {
     const centerX = rect.left + rect.width / 2;
@@ -32,6 +35,7 @@
   }
 
   function handlePointerDown(e: PointerEvent) {
+    if (disabled) return;
     isDragging = true;
     knobElement.setPointerCapture(e.pointerId);
     const rect = knobElement.getBoundingClientRect();
@@ -74,6 +78,7 @@
   }
 
   function handleWheel(e: WheelEvent) {
+    if (disabled) return;
     e.preventDefault();
     let newValue = value + (e.deltaY > 0 ? -step : step);
     if (newValue < min) newValue = min;
