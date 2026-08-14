@@ -160,20 +160,40 @@
             aria-label="Toggle Preset Mode"
             onclick={() => isPresetMode = !isPresetMode}
             disabled={timer.isRunning}
-            class="relative w-24 h-14 rounded-md bg-gradient-to-b from-zinc-700 to-zinc-900 border-x border-t border-zinc-600 border-b-[8px] border-b-zinc-950 shadow-[0_8px_15px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.2)] active:border-b-0 active:translate-y-[8px] active:shadow-[0_2px_5px_rgba(0,0,0,0.8),inset_0_2px_4px_rgba(0,0,0,0.6)] disabled:opacity-50 disabled:pointer-events-none transition-all duration-75"
+            class="relative w-20 h-14 rounded-md bg-gradient-to-b from-zinc-700 to-zinc-900 border-x border-t border-zinc-600 border-b-[8px] border-b-zinc-950 shadow-[0_8px_15px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.2)] active:border-b-0 active:translate-y-[8px] active:shadow-[0_2px_5px_rgba(0,0,0,0.8),inset_0_2px_4px_rgba(0,0,0,0.6)] disabled:opacity-50 disabled:pointer-events-none transition-all duration-75"
+          >
+          </button>
+        </div>
+
+        <!-- Theme Toggle -->
+        <div class="flex flex-col items-center gap-3">
+          <span class="text-[11px] font-bold tracking-wider text-zinc-400 uppercase">THEME</span>
+          <button
+            aria-label="Toggle Dark/Light Mode"
+            onclick={() => {
+              const html = document.documentElement;
+              if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                html.classList.add('light');
+              } else {
+                html.classList.remove('light');
+                html.classList.add('dark');
+              }
+            }}
+            class="relative w-20 h-14 rounded-md bg-gradient-to-b from-zinc-700 to-zinc-900 border-x border-t border-zinc-600 border-b-[8px] border-b-zinc-950 shadow-[0_8px_15px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.2)] active:border-b-0 active:translate-y-[8px] active:shadow-[0_2px_5px_rgba(0,0,0,0.8),inset_0_2px_4px_rgba(0,0,0,0.6)] transition-all duration-75"
           >
           </button>
         </div>
 
         <!-- Play/Pause Button -->
         <div class="flex flex-col items-center gap-3">
-          <span class="text-sm font-bold tracking-wider text-zinc-300 uppercase">
+          <span class="text-[11px] font-bold tracking-wider text-zinc-300 uppercase">
             {timer.isRunning ? 'PAUSE' : 'PLAY'}
           </span>
           <button
             aria-label="Play or Pause"
             onclick={() => timer.toggle()}
-            class="relative w-24 h-14 rounded-md bg-gradient-to-b from-zinc-700 to-zinc-900 border-x border-t border-zinc-500 border-b-[8px] border-b-zinc-950 shadow-[0_8px_15px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.3)] active:border-b-0 active:translate-y-[8px] active:shadow-[0_2px_5px_rgba(0,0,0,0.8),inset_0_2px_4px_rgba(0,0,0,0.6)] transition-all duration-75"
+            class="relative w-20 h-14 rounded-md bg-gradient-to-b from-zinc-700 to-zinc-900 border-x border-t border-zinc-500 border-b-[8px] border-b-zinc-950 shadow-[0_8px_15px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.3)] active:border-b-0 active:translate-y-[8px] active:shadow-[0_2px_5px_rgba(0,0,0,0.8),inset_0_2px_4px_rgba(0,0,0,0.6)] transition-all duration-75"
           >
           </button>
         </div>
@@ -184,7 +204,7 @@
           <button
             aria-label="Reset Timer"
             onclick={() => timer.reset()}
-            class="relative w-24 h-14 rounded-md bg-gradient-to-b from-zinc-700 to-zinc-900 border-x border-t border-zinc-600 border-b-[8px] border-b-zinc-950 shadow-[0_8px_15px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.2)] active:border-b-0 active:translate-y-[8px] active:shadow-[0_2px_5px_rgba(0,0,0,0.8),inset_0_2px_4px_rgba(0,0,0,0.6)] transition-all duration-75"
+            class="relative w-20 h-14 rounded-md bg-gradient-to-b from-zinc-700 to-zinc-900 border-x border-t border-zinc-600 border-b-[8px] border-b-zinc-950 shadow-[0_8px_15px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.2)] active:border-b-0 active:translate-y-[8px] active:shadow-[0_2px_5px_rgba(0,0,0,0.8),inset_0_2px_4px_rgba(0,0,0,0.6)] transition-all duration-75"
           >
           </button>
         </div>
