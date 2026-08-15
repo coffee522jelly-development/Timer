@@ -4,6 +4,7 @@
   import Settings from "$lib/components/Settings.svelte";
   import { PresetManager } from "$lib/presets.svelte";
   import { isPermissionGranted, requestPermission, sendNotification } from '@tauri-apps/plugin-notification';
+  import { toggleMode } from "mode-watcher";
 
   const timer = new Timer(async () => {
     try {
@@ -55,31 +56,31 @@
 
 </script>
 
-<main class="min-h-screen bg-zinc-950 flex flex-col items-center justify-center p-8 font-sans selection:bg-amber-500/30 theme-{presetManager.accentColor}">
+<main class="min-h-screen bg-zinc-100 dark:bg-zinc-950 transition-colors duration-300 flex flex-col items-center justify-center p-8 font-sans selection:bg-[var(--color-accent-custom)]/30 theme-{presetManager.accentColor}">
 
-  <div class="relative w-full max-w-lg bg-zinc-900 rounded-3xl p-10 shadow-[0_30px_60px_rgba(0,0,0,0.6),inset_0_2px_5px_rgba(255,255,255,0.05)] border border-zinc-800">
+  <div class="relative w-full max-w-lg bg-zinc-200 dark:bg-zinc-900 rounded-3xl p-10 shadow-[0_20px_40px_rgba(0,0,0,0.1),inset_0_2px_5px_rgba(255,255,255,0.5)] dark:shadow-[0_30px_60px_rgba(0,0,0,0.6),inset_0_2px_5px_rgba(255,255,255,0.05)] border border-zinc-300 dark:border-zinc-800 transition-colors duration-300">
 
     <!-- Metallic top plate -->
-    <div class="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-zinc-800/50 to-transparent rounded-t-3xl pointer-events-none"></div>
+    <div class="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-white/40 dark:from-zinc-800/50 to-transparent rounded-t-3xl pointer-events-none transition-colors duration-300"></div>
 
     <!-- Corner Screws -->
-    <div class="absolute top-5 left-5 w-4 h-4 rounded-full bg-gradient-to-br from-zinc-500 to-zinc-800 shadow-[inset_0_1px_3px_rgba(0,0,0,0.8),0_1px_1px_rgba(255,255,255,0.1)] border border-zinc-900 flex items-center justify-center pointer-events-none"><div class="w-2 h-0.5 bg-zinc-900/50 rotate-45"></div></div>
-    <div class="absolute top-5 right-5 w-4 h-4 rounded-full bg-gradient-to-br from-zinc-500 to-zinc-800 shadow-[inset_0_1px_3px_rgba(0,0,0,0.8),0_1px_1px_rgba(255,255,255,0.1)] border border-zinc-900 flex items-center justify-center pointer-events-none"><div class="w-2 h-0.5 bg-zinc-900/50 -rotate-12"></div></div>
-    <div class="absolute bottom-5 left-5 w-4 h-4 rounded-full bg-gradient-to-br from-zinc-500 to-zinc-800 shadow-[inset_0_1px_3px_rgba(0,0,0,0.8),0_1px_1px_rgba(255,255,255,0.1)] border border-zinc-900 flex items-center justify-center pointer-events-none"><div class="w-2 h-0.5 bg-zinc-900/50 rotate-12"></div></div>
-    <div class="absolute bottom-5 right-5 w-4 h-4 rounded-full bg-gradient-to-br from-zinc-500 to-zinc-800 shadow-[inset_0_1px_3px_rgba(0,0,0,0.8),0_1px_1px_rgba(255,255,255,0.1)] border border-zinc-900 flex items-center justify-center pointer-events-none"><div class="w-2 h-0.5 bg-zinc-900/50 -rotate-45"></div></div>
+    <div class="absolute top-5 left-5 w-4 h-4 rounded-full bg-gradient-to-br from-zinc-300 to-zinc-400 dark:from-zinc-500 dark:to-zinc-800 shadow-[inset_0_1px_3px_rgba(0,0,0,0.2),0_1px_1px_rgba(255,255,255,1)] dark:shadow-[inset_0_1px_3px_rgba(0,0,0,0.8),0_1px_1px_rgba(255,255,255,0.1)] border border-zinc-400 dark:border-zinc-900 flex items-center justify-center pointer-events-none transition-colors duration-300"><div class="w-2 h-0.5 bg-zinc-500/50 dark:bg-zinc-900/50 rotate-45"></div></div>
+    <div class="absolute top-5 right-5 w-4 h-4 rounded-full bg-gradient-to-br from-zinc-300 to-zinc-400 dark:from-zinc-500 dark:to-zinc-800 shadow-[inset_0_1px_3px_rgba(0,0,0,0.2),0_1px_1px_rgba(255,255,255,1)] dark:shadow-[inset_0_1px_3px_rgba(0,0,0,0.8),0_1px_1px_rgba(255,255,255,0.1)] border border-zinc-400 dark:border-zinc-900 flex items-center justify-center pointer-events-none transition-colors duration-300"><div class="w-2 h-0.5 bg-zinc-500/50 dark:bg-zinc-900/50 -rotate-12"></div></div>
+    <div class="absolute bottom-5 left-5 w-4 h-4 rounded-full bg-gradient-to-br from-zinc-300 to-zinc-400 dark:from-zinc-500 dark:to-zinc-800 shadow-[inset_0_1px_3px_rgba(0,0,0,0.2),0_1px_1px_rgba(255,255,255,1)] dark:shadow-[inset_0_1px_3px_rgba(0,0,0,0.8),0_1px_1px_rgba(255,255,255,0.1)] border border-zinc-400 dark:border-zinc-900 flex items-center justify-center pointer-events-none transition-colors duration-300"><div class="w-2 h-0.5 bg-zinc-500/50 dark:bg-zinc-900/50 rotate-12"></div></div>
+    <div class="absolute bottom-5 right-5 w-4 h-4 rounded-full bg-gradient-to-br from-zinc-300 to-zinc-400 dark:from-zinc-500 dark:to-zinc-800 shadow-[inset_0_1px_3px_rgba(0,0,0,0.2),0_1px_1px_rgba(255,255,255,1)] dark:shadow-[inset_0_1px_3px_rgba(0,0,0,0.8),0_1px_1px_rgba(255,255,255,0.1)] border border-zinc-400 dark:border-zinc-900 flex items-center justify-center pointer-events-none transition-colors duration-300"><div class="w-2 h-0.5 bg-zinc-500/50 dark:bg-zinc-900/50 -rotate-45"></div></div>
 
     <!-- Panel Header -->
     <div class="flex justify-between items-start mb-8 relative z-10">
       <div>
-        <h1 class="text-xs tracking-[0.3em] font-bold text-zinc-500 uppercase">STEEP TIMER</h1>
-        <div class="h-px w-16 bg-zinc-700 mt-2"></div>
+        <h1 class="text-xs tracking-[0.3em] font-bold text-zinc-500 dark:text-zinc-500 uppercase transition-colors duration-300">STEEP TIMER</h1>
+        <div class="h-px w-16 bg-zinc-300 dark:bg-zinc-700 mt-2 transition-colors duration-300"></div>
       </div>
 
       <!-- Settings Button -->
       <button
         aria-label="Settings"
         onclick={() => showSettings = true}
-        class="w-10 h-10 rounded-full flex items-center justify-center bg-zinc-800 border border-zinc-700 text-zinc-400 hover:text-white hover:bg-zinc-700 shadow-[0_2px_5px_rgba(0,0,0,0.5)] transition-all"
+        class="w-10 h-10 rounded-full flex items-center justify-center bg-zinc-200 border border-zinc-300 text-zinc-500 hover:text-black hover:bg-zinc-300 dark:bg-zinc-800 dark:border-zinc-700 dark:text-zinc-400 dark:hover:text-white dark:hover:bg-zinc-700 shadow-[0_2px_5px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_5px_rgba(0,0,0,0.5)] transition-all duration-300"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
       </button>
@@ -151,60 +152,51 @@
       {/if}
 
       <!-- Bottom Button Row -->
-      <div class="flex items-end justify-center gap-6 w-full pb-4">
+      <div class="flex items-end justify-center gap-4 w-full pb-4">
 
         <!-- Mode Toggle -->
         <div class="flex flex-col items-center gap-3">
-          <span class="text-[11px] font-bold tracking-wider text-zinc-400 uppercase {timer.isRunning ? 'opacity-50' : ''}">MODE</span>
+          <span class="text-[11px] font-bold tracking-wider text-black dark:text-white uppercase transition-colors duration-300 {timer.isRunning ? 'opacity-50' : ''}">MODE</span>
           <button
             aria-label="Toggle Preset Mode"
             onclick={() => isPresetMode = !isPresetMode}
             disabled={timer.isRunning}
-            class="relative w-20 h-14 rounded-md bg-gradient-to-b from-zinc-700 to-zinc-900 border-x border-t border-zinc-600 border-b-[8px] border-b-zinc-950 shadow-[0_8px_15px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.2)] active:border-b-0 active:translate-y-[8px] active:shadow-[0_2px_5px_rgba(0,0,0,0.8),inset_0_2px_4px_rgba(0,0,0,0.6)] disabled:opacity-50 disabled:pointer-events-none transition-all duration-75"
+            class="relative w-20 h-14 rounded-md bg-gradient-to-b from-zinc-300 to-zinc-400 dark:from-zinc-700 dark:to-zinc-900 border-x border-t border-zinc-400 dark:border-zinc-600 border-b-[8px] border-b-zinc-500 dark:border-b-zinc-950 shadow-[0_8px_15px_rgba(0,0,0,0.2),inset_0_1px_2px_rgba(255,255,255,0.8)] dark:shadow-[0_8px_15px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.2)] active:border-b-0 active:translate-y-[8px] active:shadow-[0_2px_5px_rgba(0,0,0,0.2),inset_0_2px_4px_rgba(0,0,0,0.1)] dark:active:shadow-[0_2px_5px_rgba(0,0,0,0.8),inset_0_2px_4px_rgba(0,0,0,0.6)] disabled:opacity-50 disabled:pointer-events-none transition-all duration-75"
           >
           </button>
         </div>
 
         <!-- Theme Toggle -->
         <div class="flex flex-col items-center gap-3">
-          <span class="text-[11px] font-bold tracking-wider text-zinc-400 uppercase">THEME</span>
+          <span class="text-[11px] font-bold tracking-wider text-black dark:text-white uppercase transition-colors duration-300">THEME</span>
           <button
             aria-label="Toggle Dark/Light Mode"
-            onclick={() => {
-              const html = document.documentElement;
-              if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                html.classList.add('light');
-              } else {
-                html.classList.remove('light');
-                html.classList.add('dark');
-              }
-            }}
-            class="relative w-20 h-14 rounded-md bg-gradient-to-b from-zinc-700 to-zinc-900 border-x border-t border-zinc-600 border-b-[8px] border-b-zinc-950 shadow-[0_8px_15px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.2)] active:border-b-0 active:translate-y-[8px] active:shadow-[0_2px_5px_rgba(0,0,0,0.8),inset_0_2px_4px_rgba(0,0,0,0.6)] transition-all duration-75"
+            onclick={toggleMode}
+            class="relative w-20 h-14 rounded-md bg-gradient-to-b from-zinc-300 to-zinc-400 dark:from-zinc-700 dark:to-zinc-900 border-x border-t border-zinc-400 dark:border-zinc-600 border-b-[8px] border-b-zinc-500 dark:border-b-zinc-950 shadow-[0_8px_15px_rgba(0,0,0,0.2),inset_0_1px_2px_rgba(255,255,255,0.8)] dark:shadow-[0_8px_15px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.2)] active:border-b-0 active:translate-y-[8px] active:shadow-[0_2px_5px_rgba(0,0,0,0.2),inset_0_2px_4px_rgba(0,0,0,0.1)] dark:active:shadow-[0_2px_5px_rgba(0,0,0,0.8),inset_0_2px_4px_rgba(0,0,0,0.6)] transition-all duration-75"
           >
           </button>
         </div>
 
         <!-- Play/Pause Button -->
         <div class="flex flex-col items-center gap-3">
-          <span class="text-[11px] font-bold tracking-wider text-zinc-300 uppercase">
+          <span class="text-[11px] font-bold tracking-wider text-black dark:text-white uppercase transition-colors duration-300">
             {timer.isRunning ? 'PAUSE' : 'PLAY'}
           </span>
           <button
             aria-label="Play or Pause"
             onclick={() => timer.toggle()}
-            class="relative w-20 h-14 rounded-md bg-gradient-to-b from-zinc-700 to-zinc-900 border-x border-t border-zinc-500 border-b-[8px] border-b-zinc-950 shadow-[0_8px_15px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.3)] active:border-b-0 active:translate-y-[8px] active:shadow-[0_2px_5px_rgba(0,0,0,0.8),inset_0_2px_4px_rgba(0,0,0,0.6)] transition-all duration-75"
+            class="relative w-20 h-14 rounded-md bg-gradient-to-b from-zinc-300 to-zinc-400 dark:from-zinc-700 dark:to-zinc-900 border-x border-t border-zinc-400 dark:border-zinc-500 border-b-[8px] border-b-zinc-500 dark:border-b-zinc-950 shadow-[0_8px_15px_rgba(0,0,0,0.2),inset_0_1px_2px_rgba(255,255,255,0.8)] dark:shadow-[0_8px_15px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.3)] active:border-b-0 active:translate-y-[8px] active:shadow-[0_2px_5px_rgba(0,0,0,0.2),inset_0_2px_4px_rgba(0,0,0,0.1)] dark:active:shadow-[0_2px_5px_rgba(0,0,0,0.8),inset_0_2px_4px_rgba(0,0,0,0.6)] transition-all duration-75"
           >
           </button>
         </div>
 
         <!-- Reset Button -->
         <div class="flex flex-col items-center gap-3">
-          <span class="text-[11px] font-bold tracking-wider text-zinc-400 uppercase">RESET</span>
+          <span class="text-[11px] font-bold tracking-wider text-black dark:text-white uppercase transition-colors duration-300">RESET</span>
           <button
             aria-label="Reset Timer"
             onclick={() => timer.reset()}
-            class="relative w-20 h-14 rounded-md bg-gradient-to-b from-zinc-700 to-zinc-900 border-x border-t border-zinc-600 border-b-[8px] border-b-zinc-950 shadow-[0_8px_15px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.2)] active:border-b-0 active:translate-y-[8px] active:shadow-[0_2px_5px_rgba(0,0,0,0.8),inset_0_2px_4px_rgba(0,0,0,0.6)] transition-all duration-75"
+            class="relative w-20 h-14 rounded-md bg-gradient-to-b from-zinc-300 to-zinc-400 dark:from-zinc-700 dark:to-zinc-900 border-x border-t border-zinc-400 dark:border-zinc-600 border-b-[8px] border-b-zinc-500 dark:border-b-zinc-950 shadow-[0_8px_15px_rgba(0,0,0,0.2),inset_0_1px_2px_rgba(255,255,255,0.8)] dark:shadow-[0_8px_15px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.2)] active:border-b-0 active:translate-y-[8px] active:shadow-[0_2px_5px_rgba(0,0,0,0.2),inset_0_2px_4px_rgba(0,0,0,0.1)] dark:active:shadow-[0_2px_5px_rgba(0,0,0,0.8),inset_0_2px_4px_rgba(0,0,0,0.6)] transition-all duration-75"
           >
           </button>
         </div>

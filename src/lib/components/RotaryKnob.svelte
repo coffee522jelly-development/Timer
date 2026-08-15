@@ -102,22 +102,22 @@
     aria-valuemin={min}
     aria-valuemax={max}
     tabindex="0"
-    class="relative rounded-full cursor-pointer touch-none flex items-center justify-center shadow-[0_20px_40px_rgba(0,0,0,0.8),0_10px_20px_rgba(0,0,0,0.6),inset_0_4px_10px_rgba(255,255,255,0.15),inset_0_-8px_15px_rgba(0,0,0,0.6)] bg-gradient-to-b from-zinc-700 via-zinc-800 to-zinc-950 border-[2px] border-zinc-600/60 ring-1 ring-black/50"
+    class="relative rounded-full cursor-pointer touch-none flex items-center justify-center shadow-[0_20px_40px_rgba(0,0,0,0.2),0_10px_20px_rgba(0,0,0,0.1),inset_0_4px_10px_rgba(255,255,255,0.8),inset_0_-8px_15px_rgba(0,0,0,0.2)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.8),0_10px_20px_rgba(0,0,0,0.6),inset_0_4px_10px_rgba(255,255,255,0.15),inset_0_-8px_15px_rgba(0,0,0,0.6)] bg-gradient-to-b from-zinc-300 via-zinc-400 to-zinc-500 dark:from-zinc-700 dark:via-zinc-800 dark:to-zinc-950 border-[2px] border-zinc-400/60 dark:border-zinc-600/60 ring-1 ring-zinc-300 dark:ring-black/50 transition-colors duration-300"
     style="width: {size}px; height: {size}px;"
   >
     <!-- Metallic texture overlay for heavy feel -->
-    <div class="absolute inset-0 rounded-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-zinc-400/20 via-zinc-800/40 to-black/80 opacity-90 pointer-events-none mix-blend-overlay"></div>
+    <div class="absolute inset-0 rounded-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/60 via-zinc-400/40 to-black/20 dark:from-zinc-400/20 dark:via-zinc-800/40 dark:to-black/80 opacity-90 pointer-events-none mix-blend-overlay transition-colors duration-300"></div>
 
     <!-- Outer grip ring (Knurling effect) -->
-    <div class="absolute inset-[4px] rounded-full border border-zinc-950 shadow-[inset_0_0_25px_rgba(0,0,0,1)] [background:repeating-conic-gradient(from_0deg,#18181b_0deg_1deg,#09090b_1deg_2deg)] opacity-95 pointer-events-none"></div>
+    <div class="absolute inset-[4px] rounded-full border border-zinc-400 dark:border-zinc-950 shadow-[inset_0_0_25px_rgba(0,0,0,0.3)] dark:shadow-[inset_0_0_25px_rgba(0,0,0,1)] [background:repeating-conic-gradient(from_0deg,#d4d4d8_0deg_1deg,#a1a1aa_1deg_2deg)] dark:[background:repeating-conic-gradient(from_0deg,#18181b_0deg_1deg,#09090b_1deg_2deg)] opacity-95 pointer-events-none transition-colors duration-300"></div>
 
     <!-- Outer metallic bezel highlight -->
-    <div class="absolute inset-[4px] rounded-full border border-t-zinc-500/40 border-b-black/80 border-x-transparent pointer-events-none"></div>
+    <div class="absolute inset-[4px] rounded-full border border-t-white/80 border-b-black/30 dark:border-t-zinc-500/40 dark:border-b-black/80 border-x-transparent pointer-events-none transition-colors duration-300"></div>
 
     <!-- Inner heavy metallic cap -->
-    <div class="absolute inset-[20%] rounded-full bg-gradient-to-br from-zinc-600 via-zinc-800 to-zinc-950 shadow-[0_8px_25px_rgba(0,0,0,0.9),inset_0_3px_8px_rgba(255,255,255,0.2),inset_0_-4px_10px_rgba(0,0,0,0.7)] flex items-center justify-center pointer-events-none border-[1.5px] border-zinc-800">
+    <div class="absolute inset-[20%] rounded-full bg-gradient-to-br from-zinc-200 via-zinc-400 to-zinc-500 dark:from-zinc-600 dark:via-zinc-800 dark:to-zinc-950 shadow-[0_8px_25px_rgba(0,0,0,0.3),inset_0_3px_8px_rgba(255,255,255,0.8),inset_0_-4px_10px_rgba(0,0,0,0.3)] dark:shadow-[0_8px_25px_rgba(0,0,0,0.9),inset_0_3px_8px_rgba(255,255,255,0.2),inset_0_-4px_10px_rgba(0,0,0,0.7)] flex items-center justify-center pointer-events-none border-[1.5px] border-zinc-300 dark:border-zinc-800 transition-colors duration-300">
         <!-- Spindle / Center dot - Dark metal indent -->
-        <div class="w-1/4 h-1/4 rounded-full bg-gradient-to-b from-zinc-950 to-black shadow-[inset_0_4px_8px_rgba(0,0,0,1),0_1px_2px_rgba(255,255,255,0.1)] border border-zinc-900"></div>
+        <div class="w-1/4 h-1/4 rounded-full bg-gradient-to-b from-zinc-400 to-zinc-500 dark:from-zinc-950 dark:to-black shadow-[inset_0_4px_8px_rgba(0,0,0,0.4),0_1px_2px_rgba(255,255,255,0.6)] dark:shadow-[inset_0_4px_8px_rgba(0,0,0,1),0_1px_2px_rgba(255,255,255,0.1)] border border-zinc-400 dark:border-zinc-900 transition-colors duration-300"></div>
     </div>
 
     <!-- Indicator line -->
